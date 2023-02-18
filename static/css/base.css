@@ -1,0 +1,40 @@
+body{
+    width: 1200px;
+    margin: 0 auto;
+    background: url("../imgs/bg_light.jpg");
+    background-size: cover;
+}
+header{
+    padding: 10px;
+    background: cornflowerblue;
+    display: flex;
+}
+.page-container{
+    width: 1200px;
+    background: white;
+}
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search div{
+    margin: 0 auto;
+    display: block;
+}
+.search form{
+    display: flex;
+    margin: 0 auto;
+}
+.search form div{
+    margin: 0 3px;
+}
+.form-select{
+    max-width: 75px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.form-control, .btn{
+    padding-top: 0;
+    padding-bottom: 0;
+}

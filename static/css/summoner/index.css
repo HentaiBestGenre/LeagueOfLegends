@@ -1,0 +1,43 @@
+h1{
+    padding: 20px;
+    margin: 0;
+}
+
+.rank-container{
+    display: flex;
+}
+
+.last_games{
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+.last_game_container a{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.last_game_container a div{
+    margin: 0 auto;
+}
+.hero_icon{
+    max-width: 48px;
+}
+.hero_icon img{
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.items{
+    display: grid;
+    grid-template-columns: 24px 24px 24px;
+}
+.items img{
+    max-width: 24px;
+    margin: 0 auto;
+    display: block;
+}
+.summoners p{
+    text-align: center;
+}

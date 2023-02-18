@@ -1,62 +1,13 @@
+{% extends "base.html" %}
+{% load humanize %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-{#    <link rel="icon" type="image/x-icon" href="{% static 'imgs/icon.ico' %}">#}
-    <title>match</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'API/css/bootstrap.css' %}">
-    <style>
-        body{
-            width: 60%;
-            margin: 0 auto;
-        }
-        .stat-container{
-            display: grid;
-            grid-auto-flow: column;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-        }
-        .player{
-            display: flex;
-        }
-        .player div{
-            margin: 0 auto;
-        }
-        .stat{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .items-container{
-            position: relative;
-            padding: 0 !important;
-        }
-        .items{
-            width: 96px;
-            height: 64px;
-            display: grid;
-            grid-auto-flow: row;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            align-items: center;
-            justify-content: center;
-        }
-        .items img{
-            width: 100%;
-        }
-        .hero_icon img{
-            width: 60px;
-            margin: auto 0;
-        }
-        .page img{
-            width: 40px;
-            margin: auto 0;
-        }
-    </style>
-</head>
-<body>
+{% load extras %}
 
+{% block style %}
+    <link href="{% static 'css/match/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
 <div class="stat-container">
     {% for stat in clean_summs_stat %}
     <div class="player">
@@ -118,44 +69,27 @@
         </div>
     </div>
 {% endfor %}
-
-
-{#<div id="farm"  class="graph">#}
-{#    {% for g in graphs.farm %}#}
-{#        <div>#}
-{#            <img src="data:image/png;base64, {{ g|safe }}">#}
-{#        </div>#}
-{#    {% endfor %}#}
-{#</div>#}
-{#<div id="fight" class="graph" style="display: none">#}
-{#    {% for g in graphs.fight %}#}
-{#        <div class="">#}
-{#            <img src="data:image/png;base64, {{ g|safe }}">#}
-{#        </div>#}
-{#    {% endfor %}#}
-{#</div>#}
-
+{% endblock %}
+{% block script %}
 <script>
 function openParticipant(participant) {
-  var i;
-  var x = document.getElementsByClassName("participant");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  document.getElementById(participant).style.display = "block";
+    var i;
+    var x = document.getElementsByClassName("participant");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    document.getElementById(participant).style.display = "block";
 }
 </script>
 
 <script>
 function openStat(Stat) {
-  var i;
-  var x = document.getElementsByClassName("graph");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  document.getElementById(Stat).style.display = "block";
+    var i;
+    var x = document.getElementsByClassName("graph");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    document.getElementById(Stat).style.display = "block";
 }
 </script>
-
-</body>
-</html>
+{% endblock script %}
