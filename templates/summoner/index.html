@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load static %}
+{% load extras %}
+
+{% block style %}
+    <style>
+        h1{
+            padding: 20px;
+            margin: 0;
+        }
+
+        .rank-container{
+            display: flex;
+        }
+
+        .last_games{
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .last_game_container a{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        .last_game_container a div{
+            margin: 0 auto;
+        }
+        .hero_icon{
+            max-width: 48px;
+        }
+        .hero_icon img{
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .items{
+            display: grid;
+            grid-template-columns: 24px 24px 24px;
+        }
+        .items img{
+            max-width: 24px;
+            margin: 0 auto;
+            display: block;
+        }
+        .summoners p{
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<h1>{{ user_data.s_name }}</h1>
+
+<div class="rank-container">
+    <div class="rank_img">
+        {% with 'imgs/league-icons-v3/'|add:rank.tier|add:".png" as rank_img %}
+        <img src="{% static rank_img %}">
+        {% endwith %}
+    </div>
+    <div class="rank_container">
+        <div class="soloqueue">
+            <span>Soloqueue<br>
+            MiniSeriesDTO Losses: {{ rank.miniSeries.losses }}<br>
+            MiniSeriesDTO Wins: {{ rank.miniSeries.wins }}</span>
+        </div>
+        <div class="rank">
+            <span>{{ rank.tier|norm_name }} {{ rank.rank }}</span>
+        </div>
+        <div class="lp">
+            <span>LP - {{ rank.leaguePoints }}</span>
+        </div>
+        <div class="winrate">
+            <span>Wins {{ rank.wins }} - Losses {{ rank.losses }}</span>
+        </div>
+    </div>
+</div>
+<div class="last_games">
+    {% for game in games_data %}
+    <div class="last_game_container">
+        <a href={% url 'match:index' match_id=game.match_id %}>
+            <div class="hero_icon">
+                <img src="{{ game.champ_data.champ_icon_url }}" alt="none">
+            </div>
+            <div>
+                {% if game.win%}
+                    <span class="win">Win</span>
+                {% else %}
+                    <span class="lose">Lose</span>
+                {% endif %}
+                <br>
+                <span>{{ game.game_duration.minute }}min {{ game.game_duration.second }}s</span><br>
+                <span>{{ game.ago|timesince|upto:',' }}</span>
+            </div>
+            <div class="stat">
+                <span style="font-size: 14px;">{{ game.score.kills }}/{{ game.score.deaths }}/{{ game.score.assists }}</span><br>
+                <span style="font-size: 10px">КДА: {{ game.score.kda }}</span>
+            </div>
+            <div class="items">
+                {% for item in game.items %}
+                    <img src="{{ item }}" alt="">
+                {% endfor %}
+            </div>
+            <div class = 'summoners'>
+                <span>{{ game.summoner_spells.1 }}</span><br>
+                <span>{{ game.summoner_spells.2 }}</span>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    <input type="hidden" value="10" name="games_number">
+</div>
+{% endblock %}
